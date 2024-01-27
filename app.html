@@ -1,0 +1,960 @@
+<!-- Form.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #DEE2E8;
+    }
+
+    textarea{
+      font-size: 13px;
+      background-color: #CDD8E8;
+      color: rgb(80, 79, 79);
+      outline: #DEE2E8;
+      border: white;
+    
+    }
+    .button {
+      background-color: #577ae6;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .tab {
+      overflow: hidden;
+      display: flex;
+      flex-wrap: nowrap;
+      border-bottom: 1px solid rgb(255, 255, 255);
+      margin-bottom: 20px;
+    }
+
+    .tab button {
+      background-color: #577ae6;
+      float: left;
+      border-radius: 10px 10px 0px 0px;
+      color: white;
+      border: 1px solid #DEE2E8;
+      border-bottom: none;
+      outline: none;
+      cursor: pointer;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      flex-grow: 1;
+      transition: 0.3s;
+    }
+
+    .tab button:hover {
+      color: rgb(46, 45, 45);
+      background-color: #c2d4ee;    }
+
+    .tab button.active {
+      color: rgb(46, 45, 45);
+      background-color: #92b5e9;
+    }
+    .lastrow {
+     position: absolute;
+      right: 5px; 
+      bottom: 5px;
+
+    }
+    /* Tab 2 */
+
+     .row1, .row2 , .row3 , .row4 , .row5 {
+      display: flex;
+      gap: 10px;
+      flex-wrap: nowrap;
+      justify-content: left;
+      padding: 10px;
+    }
+    .col1, .col2 , .col3 {
+      flex: 1;
+      overflow: hidden;
+    }
+    .row0 > p {
+      padding-left: 3px;
+      padding-bottom: 5px;
+      margin: unset;
+    }
+    .inputrow input[type="number"] {
+      width: 50px;
+      border-radius: 10px;
+      border: unset; 
+      background-color: #CDD8E8;
+      outline: none;
+
+    }
+  select {
+  appearance: none;
+  outline: 10px rgb(151, 147, 147);
+  border: unset;
+  border-radius: 5px;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: black;
+  background-color: #CDD8E8;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 2em;
+  overflow: hidden;
+  border-radius: 5px;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .5em;
+  background-color: #577ae6;
+  transition: .25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #c2d4ee;
+}
+
+select option {
+    color: #3a3a3a; 
+    background-color: #CDD8E8;
+}
+
+#loading {
+  position: absolute;
+    display: none;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: #ffffffba;
+}
+#loading > img{
+  width: 60px;
+}
+.commentBox{
+  position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+  </style>
+</head>
+<body>
+
+<div id="loading" >
+   <img src="https://i.gifer.com/ZKZg.gif" alt="Animated GIF">
+</div>
+
+<div>
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'tab1')">Automation</button>
+  <button class="tablinks" onclick="openTab(event, 'tab2')">MT/TM</button>
+  <button class="tablinks" onclick="openTab(event, 'tab3')">Post-Edit</button>
+  <button class="tablinks" onclick="openTab(event, 'tab4')">QC</button>
+  <button class="tablinks" onclick="openTab(event, 'tab5')">APIs</button>
+
+</div>
+
+<div id="tab1" class="tabcontent">
+  <!-- ! Add your input fields and form elements for Tab 1 -->
+  <form id="automationForm">
+  <div class="row1">
+    <div class="col1">
+        <div class="SelectForAutomation">
+            <div class="row0">
+                <p>Starting Step</p>
+            </div>
+            <div class="select">
+        <select id="automation" name="automation">
+          <option value="default" selected hidden disabled>Select</option>
+          <option value="mt/tm">MT/TM</option>
+          <option value="post-edit">PostEdit</option>
+        </select>
+      
+    </div>
+  </div>
+</div>
+</div>
+<div class="lastrow">
+ <!-- Submit -->
+    <button class="button" type="submit">Run</button>
+</div>
+
+</form>
+
+<!-- END -->
+</div>
+
+
+<div id="tab2" class="tabcontent">
+     <!-- ! Add your input fields and form elements for Tab 3 -->
+      <form id="mttmForm">
+    <!-- Row 1 -->
+    <div class="row1">
+        <div class="col1">
+            <div class="SelectForMT">
+                <div class="row0">
+                    <p>MT</p>
+                </div>
+                <div class="select">
+            <select id="mt-engine" name="MT">
+              <option value="mt1" selected hidden disabled>Engine</option>
+              <option value="mt2">GoogleTranslate</option>
+            </select>
+        </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+        <div class="row2">
+            <div class="col1">
+            <div class="select">
+                <select id="mt-source" name="mt-Source" class="languageSelect">
+                <option value="source" selected hidden disabled>Source</option>
+                </select>
+            </div>
+            </div>
+            <div class="col2">
+            <div class="select">
+                <select id="mt-target" name="mt-Target" class="languageSelect">
+                <option value="target1" selected hidden disabled>Target</option>
+                </select>
+            </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Row 3 -->
+       
+        <div class="row3">
+            <div class="col1">
+              <div class="row0">
+                <p>TM</p>
+            </div>
+            <div class="select"> 
+                <select id="tm-model" name="Model">
+                <option value="model1" selected hidden disabled>Model</option>
+                <option value="model2">Open AI</option>
+                </select>
+            </div>
+            </div>
+            <div class="col2">
+              <div class="row0">
+                <p>&#8203;</p>
+            </div>
+            <div class="select">
+                <select id="tm-target" name="Target" class="languageSelect">
+                <option value="target1" selected hidden disabled>Target</option>
+                </select>
+            </div>
+            </div>          
+        </div>
+        <!-- Row 4 -->
+        <!-- * Textarea for prompt -->
+        <div class="row4">
+            <div class="col1">
+            <div class="tm-prompt">
+                <textarea id="tm-prompt" name="tm-prompt" rows="10" cols="30" placeholder="prompt" >
+You are a professional translator experienced working with CAT tools. You are being presented with a Source and Fuzzy Match translation respectively from a Translation Memory. As the Fuzzy Match is being pulled from the translation memory, it may now have had the same Source as you are being presented with now. Correct the Fuzzy match to be a professionally translated version of the current source and only provide corrected translation. Make sure you take the following context into consideration.
+                </textarea>
+            </div>
+        </div>
+
+        </div>
+
+
+
+        <!-- Row 5 -->
+        <!-- * radio select between document or row -->
+        <div class="row5">
+            <div class="col1">
+            <div class="tm-SelectForTarget">
+                <input type="radio" id="document-mttm" name="document" value="document" checked>
+                <label for="document">Document</label><br>
+                <div class="inputrow" >
+                <input type="radio" id="row-mttm" name="document" value="row">
+                <label for="row">Row</label>
+                <input type="number" id="startrow" name="startrow" placeholder="Start" min="0" step="1" >
+                -
+                <input type="number" id="endrow" name="endrow" placeholder="End" min="0" step="1" >
+            </div>
+            </div>
+            </div>
+          </div>
+          <div class="lastrow">
+            <!-- Submit -->
+               <button class="button" type="submit">Run</button>
+              <button class="button" onclick="Clear(event , 'mttm')">Clear</button>
+           </div>
+           <div class="commentBox">
+            <span>Comment</span>
+            <input type="checkbox" id="agree02">
+            </div>
+          </form>
+        <!-- End -->
+         </div>
+
+
+
+<div id="tab3" class="tabcontent">
+  <!-- ! Add your input fields and form elements for Tab 3 -->
+  <form id="postEditForm">
+  <div class="row1">
+    <!-- * Select for model , source , target -->
+    <div class="col1">
+        <div class="SelectForPostEdit">
+            <div class="select">
+        <select id="postedit-model" name="postedit-model">
+          <option value="default" selected hidden disabled>Model</option>
+          <option value="model1">Open AI</option>
+        </select>
+        </div>
+        </div>
+    </div>
+        <div class="col2">
+            <div class="select">
+                <select id="postedit-source" name="postedit-source" class="languageSelect">
+                <option value="source" selected hidden disabled>Source</option>
+                
+                </select>
+            </div>
+            </div>
+            <div class="col3">
+            <div class="select">
+                <select id="postedit-target" name="postedit-target" class="languageSelect">
+                <option value="target1" selected hidden disabled>Target</option>
+                
+                </select>
+            </div>
+            </div>
+        </div>
+      <div class="row2">
+        <!-- Text area for prompt -->
+        <div class="col1">
+            <div class="postedit-prompt">
+                <textarea id="postedit-prompt" name="postedit-prompt" rows="22" cols="30" placeholder="prompt">
+You are a professional translator with experience in Post-Editing machine translated content. 
+You understand the limitations of MT and you will use your context based knowledge to improve the MT output if needed. You are being presented with a Source and machine translated target. You will review the MT output and apply correct language rules for the target language and take the following document context into consideration, which the MT engine would not have had. </textarea>
+            </div>
+      </div>
+      </div>
+              <!-- * radio select between document or row -->
+        <div class="row3">
+            <div class="col1">
+            <div class="postEditForTarget">
+                <input type="radio" id="document-postEdit" name="document" value="document" checked>
+                <label for="document">Document</label><br>
+                <div class="inputrow" >
+                <input type="radio" id="row-postEdit" name="document" value="row">
+                <label for="row">Row</label>
+                <input type="number" id="PEstartrow" name="startrow" placeholder="Start" min="0" step="1" >
+                -
+                <input type="number" id="PEendrow" name="endrow" placeholder="End" min="0" step="1" >
+            </div>
+            </div>
+            </div>
+          </div>
+      <div class="lastrow">
+        <!-- Submit -->
+           <button class="button" type="submit">Run</button>
+           <button class="button" onclick="Clear(event , 'post-edit')" >Clear</button>
+       </div>
+       <div class="commentBox">
+        <span>Comment</span>
+        <input type="checkbox" id="agree03">
+        </div>
+      </form>
+
+        <!-- End -->
+  </div>
+
+
+<div id="tab4" class="tabcontent">
+  <!--  ! Add your input fields and form elements for Tab 4 -->
+  <form id="qcForm">
+  <!-- Row 1 -->
+  <div class="row1">
+    <!-- Select for model source and target -->
+    <div class="col1">
+        <div class="SelectForQC">
+            <div class="select">
+        <select id="qc-model" name="qc-model">
+          <option value="default" selected hidden disabled>Model</option>
+          <option value="model1">Open AI</option>
+        </select>
+        </div>
+        </div>
+        </div>
+        <div class="col2">
+            <div class="select">
+                <select id="qc-source" name="qc-source" class="languageSelect">
+                <option value="source" selected hidden disabled>Source</option>
+                </select>
+            </div>
+            </div>
+            <div class="col3">
+            <div class="select">
+                <select id="qc-target" name="qc-target" class="languageSelect">
+                <option value="target1" selected hidden disabled>Target</option>
+                </select>
+            </div>
+            </div>
+
+  </div>
+  <!-- Row 2 -->
+  <div class="row2">
+    <!-- Text area for prompt -->
+    <div class="col1">
+        <div class="qc-prompt">
+            <textarea id="qc-prompt" name="qc-prompt" rows="22" cols="30" placeholder="prompt">
+You are a professional linguist who has been trained on the TAUS DQF model. You will be presented with a source and target translation. You will provide a corrected target translation (only if necessary), a segment level score and quality feedback for the segment provided. Take the following context into consideration: </textarea>
+        </div>
+</div>
+</div>
+<!-- radio select between document and row -->
+<div class="row3">
+    <div class="col1">
+    <div class="qcForTarget">
+        <input type="radio" id="document-qc" name="document" value="document" checked>
+        <label for="document">Document</label><br>
+        <div class="inputrow" >
+        <input type="radio" id="row-qc" name="document" value="row">
+        <label for="row">Row</label>
+        <input type="number" id="QCstartrow" name="startrow" placeholder="Start" min="0" step="1" >
+        -
+        <input type="number" id="QCendrow" name="endrow" placeholder="End" min="0" step="1" >
+    </div>
+    </div>
+    </div>
+  </div>
+
+<div class="lastrow">
+  <!-- Submit -->
+      <button class="button" type="submit">Run</button>
+     <button class="button" onclick="Clear(event , 'qc')" >Clear</button>
+    </div>
+  <div class="commentBox">
+    <span>Comment</span>
+    <input type="checkbox" id="agree04">
+    </div>
+</form>
+<!-- End -->  
+</div>
+
+<div id="tab5" class="tabcontent">
+    <h1>API</h1>
+    <!-- ! Add your input fields and form elements for Tab 5 -->
+  </div>
+
+<script>
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var defaultTab = document.getElementsByClassName("tablinks")[0];
+    defaultTab.click();
+  });
+
+
+// Form submit functions
+
+
+  //------------------------ Automation----------------------------------------------
+  document.getElementById('automationForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      if (validateAutomation()) {
+        automation();
+      }
+    });
+
+    function validateAutomation() {
+      var selectedValue = document.getElementById('automation').value;
+
+      // Check if the selected value is valid
+      if (selectedValue === 'default') {
+        alert('Please select a valid starting step.');
+        return false; // Validation failed
+      }
+
+      // Other validation logic can be added here if needed
+
+      // If validation passes, return true
+      return true;
+    }
+
+    function automation() {
+      let selectedValue = document.getElementById('automation').value;
+      if(selectedValue === 'mt/tm'){
+        // call mttm function
+        if(validateMTTM() && validatePostEdit() && validateQC()){
+          const objmttm = mttm();
+          const objPostEdit = postEdit();
+          const objQC = qc();
+          document.getElementById('loading').style.display = "flex"; // Show loading at the beginning
+
+          google.script.run
+            .withSuccessHandler(() => {
+              // First success handler
+              google.script.run
+                .withSuccessHandler(() => {
+                  // Second success handler
+                  google.script.run
+                    .withSuccessHandler(() => {
+                      // Third success handler
+                      document.getElementById('loading').style.display = "none"; // Hide loading when the whole chain is complete
+                    })
+                    .withFailureHandler((error) => {
+                      // Third failure handler
+                      alert('Error in processQCRows: ' + error);
+                      document.getElementById('loading').style.display = "none";
+                    })
+                    .processQCRows(objQC);
+                })
+                .withFailureHandler((error) => {
+                  // Second failure handler
+                  alert('Error in processPostEditRows: ' + error);
+                  document.getElementById('loading').style.display = "none";
+                })
+                .processPostEditRows(objPostEdit);
+            })
+            .withFailureHandler((error) => {
+              // First failure handler
+              alert('Error in processmttm: ' + error);
+              document.getElementById('loading').style.display = "none";
+            })
+            .processmttm(objmttm);
+
+        }
+      }
+      else if(selectedValue === 'post-edit'){
+        // call post-edit function
+      if(validatePostEdit() &&  validateQC()){
+        const objPostEdit = postEdit();
+        const objQC = qc();
+        document.getElementById('loading').style.display = "flex"; // Show loading at the beginning
+
+        google.script.run
+          .withSuccessHandler(() => {
+            // First success handler
+            google.script.run
+              .withSuccessHandler(() => {
+                // Second success handler
+                document.getElementById('loading').style.display = "none"; // Hide loading when the whole chain is complete
+              })
+              .withFailureHandler((error) => {
+                // Second failure handler
+                alert('Error in processPostEditRows: ' + error);
+                document.getElementById('loading').style.display = "none";
+              })
+              .processPostEditRows(objPostEdit);
+          })
+          .withFailureHandler((error) => {
+            // First failure handler
+            alert('Error in processmttm: ' + error);
+            document.getElementById('loading').style.display = "none";
+          })
+          .processmttm(objmttm);
+      }
+      }
+      else{
+        alert('Error Happened!')
+      }
+      return false;
+    }
+
+    //-------------------------------------- MT/TM----------------------------------------------
+    document.getElementById('mttmForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      if (validateMTTM()) {
+       const obj = mttm();
+       try{
+          document.getElementById('loading').style.display = "flex";
+          await google.script.run.withSuccessHandler(
+            ()=>{
+              document.getElementById('loading').style.display = "none";
+            }
+          ).processmttm(obj);
+       }
+       catch{
+        alert('Error Happened!')
+        document.getElementById('loading').style.display = "none";
+
+       }    
+      }
+    });
+
+
+
+    function validateMTTM() {
+      let mtEngine = document.getElementById('mt-engine').value;
+      let mtSource = document.getElementById('mt-source').value;
+      let mtTarget = document.getElementById('mt-target').value;
+      let tmModel = document.getElementById('tm-model').value;
+      let tmTarget = document.getElementById('tm-target').value;
+      let tmPrompt = document.getElementById('tm-prompt').value;
+      let documentMTTM = document.getElementById('document-mttm').checked;
+      let rowMTTM = document.getElementById('row-mttm').checked;
+      let startRow = parseInt(document.getElementById('startrow').value);
+      let endRow = parseInt(document.getElementById('endrow').value);
+      
+      if (mtEngine === 'default') {
+        alert('Please select a valid MT Engine.');
+        return false; // Validation failed
+      }
+      if (mtTarget === 'target1') {
+        alert('Please select a valid MT Target.');
+        return false; // Validation failed
+      }
+      if (mtSource === 'source') {
+        alert('Please select a valid MT Source.');
+        return false; // Validation failed
+      }
+      if (tmModel === 'model1') {
+        alert('Please select a valid TM Model.');
+        return false; // Validation failed
+      }
+      if (tmTarget === 'target1') {
+        alert('Please select a valid TM Target.');
+        return false; // Validation failed
+      }
+      if (tmPrompt === '') {
+        alert('Please enter a valid TM Prompt.');
+        return false; // Validation failed
+      }
+    // condition if row is checked the start and end row must be filled
+      if (rowMTTM === true && (startRow === '' || endRow === '')) {
+        alert('Please enter a valid start and end row.');
+        return false; // Validation failed
+      }
+      // condition if start row is greater than end row
+      if (startRow > endRow) {
+        alert('Please enter a valid start and end row.');
+        return false; // Validation failed
+      }
+      else {
+        return true;
+      }
+      // Other validation logic can be added here if needed
+    }
+    function mttm() {
+      // after validation get all the values and save them in object "objmttm"
+      let mtEngine = document.getElementById('mt-engine').value;  
+      let mtSource = document.getElementById('mt-source').value;
+      let mtTarget = document.getElementById('mt-target').value;
+      let tmModel = document.getElementById('tm-model').value;
+      // index
+      let tmTarget = document.getElementById('tm-target');
+      let index = tmTarget.selectedIndex;
+      let tmselvalue = tmTarget.options[index].textContent;
+
+      let tmPrompt = document.getElementById('tm-prompt').value;
+      if (document.getElementById('document-mttm').checked) {
+        var documentMTTM = document.getElementById('document-mttm').value;
+      } else {
+        var rowMTTM = document.getElementById('row-mttm').checked;
+      }
+      let startRow = parseInt(document.getElementById('startrow').value);
+      let endRow = parseInt(document.getElementById('endrow').value);
+      let comment = document.getElementById('agree02').checked;
+
+      if (mtSource === 'source') {
+         mtSource = false;
+      }
+      let objmttm = {
+        mtEngine: mtEngine,
+        mtSource: mtSource,
+        mtTarget: mtTarget,
+        tmModel: tmModel,
+        tmTarget: tmselvalue,
+        tmPrompt: tmPrompt,
+        documentMTTM: documentMTTM,
+        rowMTTM: rowMTTM,
+        startRow: startRow,
+        endRow: endRow,
+        comment: comment
+      };
+      return objmttm;
+    }
+
+
+
+//         --------------------------------------Post-Edit----------------------------------------------
+
+   document.getElementById('postEditForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      if (validatePostEdit()) {
+       const obj = postEdit();
+       try{
+          document.getElementById('loading').style.display = "flex";
+          await google.script.run.withSuccessHandler(
+            ()=>{
+              document.getElementById('loading').style.display = "none";
+            }
+          ).processPostEditRows(obj);
+       }
+       catch{
+        alert('Error Happened!')
+        document.getElementById('loading').style.display = "none";
+
+       }    
+      }
+    }); 
+
+    function validatePostEdit() {
+      let postEditModel = document.getElementById('postedit-model').value;
+      let postEditSource = document.getElementById('postedit-source').value;
+      let postEditTarget = document.getElementById('postedit-target').value;
+      let postEditPrompt = document.getElementById('postedit-prompt').value;
+      let documentPostEdit = document.getElementById('document-postEdit').checked;
+      let rowPostEdit = document.getElementById('row-postEdit').checked;
+      let startRow = parseInt(document.getElementById('PEstartrow').value);
+      let endRow = parseInt(document.getElementById('PEendrow').value);
+      
+      if (postEditModel === 'default') {
+        alert('Please select a valid PostEdit Model.');
+        return false; // Validation failed
+      }
+
+      if (postEditTarget === 'target1') {
+        alert('Please select a valid PostEdit Target.');
+        return false; // Validation failed
+      }
+      if (postEditPrompt === '') {
+        alert('Please enter a valid PostEdit Prompt.');
+        return false; // Validation failed
+      }
+    // condition if row is checked the start and end row must be filled
+      if (rowPostEdit === true && (startRow === '' || endRow === '')) {
+        alert('Please enter a valid start and end row.');
+        return false; // Validation failed
+      }
+      // condition if start row is greater than end row
+      if (startRow > endRow) {
+        alert('Please enter a valid start and end row.');
+        return false; // Validation failed
+      }
+      else {
+        return true;
+      }
+      // Other validation logic can be added here if needed
+    }
+    function postEdit() {
+      // after validation get all the values and save them in object "objmttm"
+      let postEditModel = document.getElementById('postedit-model').value;  
+      let postEditSource = document.getElementById('postedit-source').value;
+      let postEditTarget = document.getElementById('postedit-target');
+      let index = postEditTarget.selectedIndex;
+      let postEditSelValue = postEditTarget.options[index].textContent;
+      let postEditPrompt = document.getElementById('postedit-prompt').value;
+      var documentPostEdit = document.getElementById('document-postEdit').checked;
+      var rowPostEdit = document.getElementById('row-postEdit').checked;
+      let startRow = parseInt(document.getElementById('PEstartrow').value);
+      let endRow = parseInt(document.getElementById('PEendrow').value);
+      let comment = document.getElementById('agree03').checked;
+
+      if (postEditSource === 'source') {
+        postEditSource = false;
+      }
+      let objPostEdit = {
+        postEditModel: postEditModel,
+        postEditSource: postEditSource,
+        postEditTarget: postEditSelValue,
+        postEditPrompt: postEditPrompt,
+        documentPostEdit: documentPostEdit,
+        rowPostEdit: rowPostEdit,
+        startRow: startRow,
+        endRow: endRow,
+        comment: comment
+      };
+      return objPostEdit;
+    }
+
+
+
+//         --------------------------------------QC----------------------------------------------
+document.getElementById('qcForm').addEventListener('submit',  function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      if (validateQC()) {
+       const obj = qc();
+       try{
+          document.getElementById('loading').style.display = "flex";
+           google.script.run.withSuccessHandler(
+            ()=>{
+              document.getElementById('loading').style.display = "none";
+            }
+          ).processQCRows(obj);
+       }
+       catch{
+        alert('Error Happened!')
+        document.getElementById('loading').style.display = "none";
+       }    
+      }
+    }); 
+
+    function validateQC() {
+      let qcModel = document.getElementById('qc-model').value;
+      let qcSource = document.getElementById('qc-source').value;
+      let qcTarget = document.getElementById('qc-target').value;
+      let qcPrompt = document.getElementById('qc-prompt').value;
+      let documentQC = document.getElementById('document-qc').checked;
+      let rowQC = document.getElementById('row-qc').checked;
+      let startRow = parseInt(document.getElementById('QCstartrow').value);
+      let endRow = parseInt(document.getElementById('QCendrow').value);
+      
+      if (qcModel === 'default') {
+        alert('Please select a valid QC Model.');
+        return false; // Validation failed
+      }
+      if (qcTarget === 'target1') {
+        alert('Please select a valid QC Target.');
+        return false; // Validation failed
+      }
+      if (qcPrompt === '') {
+        alert('Please enter a valid QC Prompt.');
+        return false; // Validation failed
+      }
+    // condition if row is checked the start and end row must be filled
+      if (rowQC === true && (startRow === '' || endRow === '')) {
+        alert('Please enter a valid start and end row.');
+        return false; // Validation failed
+      }
+      else {
+        return true;
+      }
+      // Other validation logic can be added here if needed
+    }
+
+    function qc() {
+      // after validation get all the values and save them in object "objmttm"
+      let qcModel = document.getElementById('qc-model').value;  
+      let qcSource = document.getElementById('qc-source').value;
+      let qcTarget = document.getElementById('qc-target');
+      let index = qcTarget.selectedIndex;
+      let qcselvalue = qcTarget.options[index].textContent;
+      let qcPrompt = document.getElementById('qc-prompt').value;
+      let documentQC = document.getElementById('document-qc').checked;
+      let rowQC = document.getElementById('row-qc').checked;
+      let startRow = parseInt(document.getElementById('QCstartrow').value);
+      let comment = document.getElementById('agree04').checked;
+      let endRow = parseInt(document.getElementById('QCendrow').value);
+      if (qcSource === 'source') {
+        qcSource = false;
+      }
+      let objQC = {
+        qcModel: qcModel,
+        qcSource: qcSource,
+        qcTarget: qcselvalue,
+        qcPrompt: qcPrompt,
+        documentQC: documentQC,
+        rowQC: rowQC,
+        startRow: startRow,
+        endRow: endRow,
+        comment: comment
+      };
+      return objQC;
+    }
+
+
+
+
+// Select for language
+google.script.run.withSuccessHandler(function(languages) {
+  var selects = document.querySelectorAll('.languageSelect');
+
+  selects.forEach(function(select) {
+    languages.forEach(function(language) {
+      var option = document.createElement('option');
+      option.value = language.code;
+      option.text = language.name;
+      select.add(option);
+    });
+  });
+}).getLanguageNames();
+
+
+// Clear Function
+function Clear(event , str){
+  event.preventDefault();
+  if(str=='mttm'){
+    let startRow = document.getElementById('startrow').value;
+    let endRow = document.getElementById('endrow').value;
+    rowMTTM = document.getElementById('row-mttm').checked;
+    obj = {
+      col : 4,
+      startRow: startRow,
+      endRow: endRow,
+      row: rowMTTM  
+    }
+    google.script.run.clearDataFromColumn(obj);
+  }
+  else if(str=='post-edit'){
+    let startRow = document.getElementById('PEstartrow').value;
+    let endRow = document.getElementById('PEendrow').value;
+    rowPostEdit = document.getElementById('row-postEdit').checked;
+    obj = {
+      col : 5,
+      startRow: startRow,
+      endRow: endRow,
+      row: rowPostEdit  
+    }
+    google.script.run.clearDataFromColumn(obj);
+  }
+  else if(str=='qc'){
+    let startRow = document.getElementById('QCstartrow').value;
+    let endRow = document.getElementById('QCendrow').value;
+    rowQC = document.getElementById('row-qc').checked;
+    obj = {
+      col : {
+        col1: 6,
+        col2: 7,
+        col3: 8
+      },
+      startRow: startRow,
+      endRow: endRow,
+      row: rowQC  
+    }
+    google.script.run.clearDataFromColumn(obj);
+  }
+  else{
+    alert('Error Happened!')
+  }
+}
+
+
+</script>
+</body>
+</html>

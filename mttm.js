@@ -17,7 +17,7 @@ async function processmttm(data) {
     if(data.comment){
       data.tmPrompt = data.tmPrompt + " you need to Provide a seperate short 1 or 2 sentence explanation for your changes to MT output and follow "+ rule;
     }
-    var apiKey = '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'; // Replace with your OpenAI API key
+    var apiKey = 'your_api_key'; // Replace with your OpenAI API key
     var apiUrl = 'https://api.openai.com/v1/chat/completions'; // Updated endpoint for GPT-3.5 Turbo
 
   // Prepare the request payload

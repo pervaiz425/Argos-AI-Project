@@ -2,7 +2,7 @@ function processPostEditRows(data) {
     // Get the active spreadsheet
   
     function sendToOpenAI(promptText) {
-    var apiKey = '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'; // Replace with your OpenAI API key
+    var apiKey = 'your_api_key'; // Replace with your OpenAI API key
     var apiUrl = 'https://api.openai.com/v1/chat/completions'; // Updated endpoint for GPT-3.5 Turbo
 
 
